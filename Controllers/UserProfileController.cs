@@ -57,6 +57,26 @@ namespace ShopApi.Controllers
 
             response = new ApiResponse().setFailure();
             return BadRequest(response);
-        } 
+        }
+
+        [HttpDelete("/userprofile{Uid}")]
+        public ActionResult DeleteUser(int Uid)
+        {
+            var userprofile = _context.UserProfileDbs.FirstOrDefault(e => e.Uid == Uid);
+            if(userprofile != null)
+            {
+                _context.UserProfileDbs.Remove(userprofile);
+                _context.SaveChanges();
+                response = new ApiResponse().setSuccess();
+                response.message = "User removed successfully";
+                return Ok(response);
+            }
+            else
+            {
+                response = new ApiResponse().setFailure();
+                response.message = "User does't exsist";
+                return NotFound(response);
+            }
+        }        
     }
 }
