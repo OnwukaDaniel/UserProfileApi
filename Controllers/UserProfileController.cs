@@ -34,7 +34,7 @@ namespace ShopApi.Controllers
             if (userProfile != null)
             {
                 response = new ApiResponse().setSuccess(data: new Dictionary<string, dynamic> { { "userprofile", userProfile } });
-                return Ok(userProfile);
+                return Ok(response);
             }
             else
             {
