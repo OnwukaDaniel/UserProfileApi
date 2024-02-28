@@ -21,7 +21,9 @@ namespace ShopApi.Controllers
         [HttpGet("/userprofile")]
         public async Task<ActionResult<IEnumerable<UserProfileDb>>> GetUserProfiles()
         {
-            return await _context.UserProfileDbs.ToListAsync();
+            var data = await _context.UserProfileDbs.ToListAsync();
+            response = new ApiResponse().setSuccess(data: new Dictionary<string, dynamic> { { "profiles", data } });
+            return Ok(response); 
         }
 
 
